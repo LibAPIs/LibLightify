@@ -1,4 +1,4 @@
-package main.org.aihac.modules.lighting.lightify;
+package com.mclarkdev.tools.lightify;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -6,9 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.mclarkdev.tools.libobjectpooler.LibObjectPooler;
 import com.mclarkdev.tools.libobjectpooler.LibObjectPoolerController;
-
-import main.org.aihac.modules.lighting.lightify.api.LightifyClient;
-import main.org.aihac.modules.lighting.lightify.api.LightifyDevice;
+import com.mclarkdev.tools.lightify.api.LightifyClient;
+import com.mclarkdev.tools.lightify.api.LightifyDevice;
 
 public class LightifyController {
 

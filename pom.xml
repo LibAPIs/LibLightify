@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<organization>
@@ -9,17 +9,16 @@
 	</organization>
 
 	<groupId>com.mclarkdev.tools</groupId>
-	<artifactId>lightify</artifactId>
-	<version>0.0.1</version>
+	<artifactId>liblightify</artifactId>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
-	<name>lightify</name>
-	<url>https://www.mclarkdev.com/tools/lightify</url>
-	<description>A controller for lightify devices.</description>
+	<name>liblightify</name>
+	<url>https://about.mclarkdev.com/posts/1097/libapis/</url>
+	<description>Controller for Lightify devices.</description>
 
 	<scm>
-		<url>https://git.mclarkdev.com/MClarkDev.com--Public/LightifyController.git
-		</url>
+		<url>https://git.mclarkdev.com/MClarkDev.com--Public/liblightify.git</url>
 	</scm>
 
 	<licenses>
@@ -46,11 +45,6 @@
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>

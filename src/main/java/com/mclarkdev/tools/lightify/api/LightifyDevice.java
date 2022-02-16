@@ -1,4 +1,4 @@
-package main.org.aihac.modules.lighting.lightify.api;
+package com.mclarkdev.tools.lightify.api;
 
 import java.awt.Color;
 

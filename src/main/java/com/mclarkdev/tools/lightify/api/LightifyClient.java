@@ -1,4 +1,4 @@
-package main.org.aihac.modules.lighting.lightify.api;
+package com.mclarkdev.tools.lightify.api;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -74,8 +74,6 @@ public class LightifyClient {
 
 	/**
 	 * Turn off all lights.
-	 * 
-	 * @throws Exception
 	 */
 	public void blackout() {
 
@@ -131,8 +129,6 @@ public class LightifyClient {
 	 * Send a binary command to the gateway.
 	 * 
 	 * @param command
-	 * @return
-	 * @throws Exception
 	 */
 	public byte[] sendCommand(byte[] command) throws Exception {
 
@@ -168,9 +164,6 @@ public class LightifyClient {
 
 	/**
 	 * Get a list of known devices from the gateway.
-	 * 
-	 * @return
-	 * @throws Exception
 	 */
 	public LightifyDevice[] getDevices() throws Exception {
 
@@ -180,10 +173,6 @@ public class LightifyClient {
 	/**
 	 * Get a list of known devices from the gateway whose name contains the provided
 	 * string.
-	 * 
-	 * @param inGroup
-	 * @return
-	 * @throws Exception
 	 */
 	public LightifyDevice[] getDevices(String contains) throws Exception {
 
@@ -328,7 +317,7 @@ public class LightifyClient {
 	 * Temperature range: 2200K - 6500K
 	 * 
 	 * @param device
-	 * @param temperature
+	 * @param temp
 	 * @return
 	 */
 	public boolean setDeviceTemperature(LightifyDevice device, int temp) throws Exception {
