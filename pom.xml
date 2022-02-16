@@ -3,12 +3,39 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<organization>
+		<name>MClarkDev.com</name>
+		<url>https://about.mclarkdev.com/</url>
+	</organization>
+
 	<groupId>com.mclarkdev.tools</groupId>
 	<artifactId>lightify</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-
-	<name>server</name>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
+
+	<name>lightify</name>
+	<url>https://www.mclarkdev.com/tools/lightify</url>
+	<description>A controller for lightify devices.</description>
+
+	<scm>
+		<url>https://git.mclarkdev.com/MClarkDev.com--Public/LightifyController.git
+		</url>
+	</scm>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Matt Clark</name>
+			<email>matt@mclarkdev.com</email>
+			<url>https://about.mclarkdev.com/</url>
+		</developer>
+	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,6 +46,11 @@
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
