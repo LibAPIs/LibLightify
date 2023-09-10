@@ -7,11 +7,14 @@ import org.json.JSONObject;
 
 import com.mclarkdev.tools.libextras.LibExtrasStrings;
 
-public class LightifyDevice {
+/**
+ * LibLightify // LibLightifyDevice
+ */
+public class LibLightifyDevice {
 
 	private final String macAddress;
 
-	private final LightifyCapability[] caps;
+	private final LibLightifyCapability[] caps;
 
 	private final String firmwareVersion;
 
@@ -29,7 +32,7 @@ public class LightifyDevice {
 
 	private final String name;
 
-	public LightifyDevice(byte[] bin) {
+	public LibLightifyDevice(byte[] bin) {
 
 		byte[] mac = new byte[8];
 
@@ -37,7 +40,7 @@ public class LightifyDevice {
 
 		this.macAddress = LibExtrasStrings.reverseString(LibExtrasStrings.bytesToHex(mac), 2);
 
-		this.caps = LightifyCapability.getCapabilities(bin[10]);
+		this.caps = LibLightifyCapability.getCapabilities(bin[10]);
 
 		this.firmwareVersion = "" + (int) bin[11] + //
 				"" + (int) bin[12] + //
@@ -64,54 +67,105 @@ public class LightifyDevice {
 		this.name = new String(nameBytes).trim();
 	}
 
+	/**
+	 * Returns the MAC address of the device.
+	 * 
+	 * @return MAC address of the device
+	 */
 	public String getMac() {
 
 		return macAddress;
 	}
 
+	/**
+	 * Returns the firmware string of the device.
+	 * 
+	 * @return firmware version of device
+	 */
 	public String getFirmwareVersion() {
 
 		return firmwareVersion;
 	}
 
+	/**
+	 * Returns true if the device is online and connected.
+	 * 
+	 * @return device is online
+	 */
 	public boolean isOnline() {
 
 		return online;
 	}
 
+	/**
+	 * Returns true if the device is powered on.
+	 * 
+	 * @return device powered on
+	 */
 	public boolean getPoweredOn() {
 
 		return poweredOn;
 	}
 
+	/**
+	 * Returns the brightness of the device.
+	 * 
+	 * @return brightness of the device (0..255)
+	 */
 	public int getBrightness() {
 
 		return brightness;
 	}
 
+	/**
+	 * Returns the color temperature of the device.
+	 * 
+	 * @return color temperature of the device
+	 */
 	public long getTemperature() {
 
 		return temperature;
 	}
 
+	/**
+	 * Returns the color of the device.
+	 * 
+	 * @return color of the device
+	 */
 	public Color getColor() {
 
 		return color;
 	}
 
+	/**
+	 * Returns amount of White present.
+	 *
+	 * @return value of White (0..255)
+	 */
 	public int getWhite() {
 
 		return white;
 	}
 
+	/**
+	 * Returns the name of the device.
+	 * 
+	 * @return name of the device
+	 */
 	public String getName() {
 
 		return name;
 	}
 
-	public boolean supports(LightifyCapability theCapability) {
+	/**
+	 * Returns true if a device supports a specific capability.
+	 * 
+	 * @param theCapability the capability
+	 * @return capability supported
+	 */
+	public boolean supports(LibLightifyCapability theCapability) {
 
-		for (LightifyCapability capability : caps) {
+		for (LibLightifyCapability capability : caps) {
 
 			if (capability == theCapability) {
 
@@ -121,6 +175,11 @@ public class LightifyDevice {
 		return false;
 	}
 
+	/**
+	 * Returns the device info as a JSON object.
+	 * 
+	 * @return device info
+	 */
 	public JSONObject getDetails() {
 
 		// basic device details
@@ -133,27 +192,27 @@ public class LightifyDevice {
 		// add device capabilities
 		JSONArray capabilities = new JSONArray();
 		details.put("capabilities", capabilities);
-		for (LightifyCapability cap : caps) {
+		for (LibLightifyCapability cap : caps) {
 			capabilities.put(cap.toString());
 		}
 
 		// device power state
-		if (supports(LightifyCapability.POWER)) {
+		if (supports(LibLightifyCapability.POWER)) {
 			details.put("power", poweredOn);
 		}
 
 		// details for brightness feature
-		if (supports(LightifyCapability.BRIGHTNESS)) {
+		if (supports(LibLightifyCapability.BRIGHTNESS)) {
 			details.put("brightness", brightness);
 		}
 
 		// details for temperature feature
-		if (supports(LightifyCapability.TEMPERATURE)) {
+		if (supports(LibLightifyCapability.TEMPERATURE)) {
 			details.put("temperature", temperature);
 		}
 
 		// details for color feature
-		if (supports(LightifyCapability.COLOR)) {
+		if (supports(LibLightifyCapability.COLOR)) {
 			details.put("color", new JSONObject()//
 					.put("red", color.getRed())//
 					.put("green", color.getGreen())//

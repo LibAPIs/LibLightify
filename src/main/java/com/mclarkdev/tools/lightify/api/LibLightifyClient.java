@@ -7,7 +7,10 @@ import java.util.ArrayList;
 
 import com.mclarkdev.tools.libextras.LibExtrasStrings;
 
-public class LightifyClient {
+/**
+ * LibLightify // LibLightifyClient
+ */
+public class LibLightifyClient {
 
 	private final String gatewayIP;
 
@@ -21,7 +24,7 @@ public class LightifyClient {
 	 * @param gatewayIP
 	 * @throws IOException
 	 */
-	public LightifyClient(String gatewayIP) throws IOException {
+	public LibLightifyClient(String gatewayIP) throws IOException {
 
 		this(gatewayIP, 4000);
 	}
@@ -33,7 +36,7 @@ public class LightifyClient {
 	 * @param gatewayPort
 	 * @throws IOException
 	 */
-	public LightifyClient(String gatewayIP, int gatewayPort) throws IOException {
+	public LibLightifyClient(String gatewayIP, int gatewayPort) throws IOException {
 
 		this.gatewayIP = gatewayIP;
 		this.gatewayPort = gatewayPort;
@@ -77,7 +80,7 @@ public class LightifyClient {
 	 */
 	public void blackout() {
 
-		LightifyDevice[] devices;
+		LibLightifyDevice[] devices;
 		try {
 
 			devices = getDevices();
@@ -86,7 +89,7 @@ public class LightifyClient {
 		}
 
 		// get all devices
-		for (LightifyDevice device : devices) {
+		for (LibLightifyDevice device : devices) {
 
 			// skip disconnected devices
 			if (!device.isOnline()) {
@@ -94,7 +97,7 @@ public class LightifyClient {
 			}
 
 			// skip if power state not available
-			if (!device.supports(LightifyCapability.POWER)) {
+			if (!device.supports(LibLightifyCapability.POWER)) {
 				continue;
 			}
 
@@ -128,7 +131,7 @@ public class LightifyClient {
 	/**
 	 * Send a binary command to the gateway.
 	 * 
-	 * @param command
+	 * @param command the command data
 	 */
 	public byte[] sendCommand(byte[] command) throws Exception {
 
@@ -164,8 +167,11 @@ public class LightifyClient {
 
 	/**
 	 * Get a list of known devices from the gateway.
+	 * 
+	 * @return an array of devices
+	 * @throws Exception failure fetching devices
 	 */
-	public LightifyDevice[] getDevices() throws Exception {
+	public LibLightifyDevice[] getDevices() throws Exception {
 
 		return getDevices(null);
 	}
@@ -173,8 +179,12 @@ public class LightifyClient {
 	/**
 	 * Get a list of known devices from the gateway whose name contains the provided
 	 * string.
+	 * 
+	 * @param contains filter string
+	 * @return devices matching filter string
+	 * @throws Exception failure fetching devices
 	 */
-	public LightifyDevice[] getDevices(String contains) throws Exception {
+	public LibLightifyDevice[] getDevices(String contains) throws Exception {
 
 		// base command
 		byte[] command = { 0x0B, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00 };
@@ -185,7 +195,7 @@ public class LightifyClient {
 		// get number of devices
 		int deviceCount = response[9];
 
-		ArrayList<LightifyDevice> devices = new ArrayList<>();
+		ArrayList<LibLightifyDevice> devices = new ArrayList<>();
 
 		for (int x = 0; x < deviceCount; x++) {
 
@@ -199,7 +209,7 @@ public class LightifyClient {
 			System.arraycopy(response, start, deviceData, 0, 50);
 
 			// build device object with blob
-			LightifyDevice device = new LightifyDevice(deviceData);
+			LibLightifyDevice device = new LibLightifyDevice(deviceData);
 
 			// if no match pattern
 			if (contains == null || contains.equals("")) {
@@ -218,7 +228,7 @@ public class LightifyClient {
 		}
 
 		// return list of devices as array
-		return devices.toArray(new LightifyDevice[devices.size()]);
+		return devices.toArray(new LibLightifyDevice[devices.size()]);
 	}
 
 	/**
@@ -229,10 +239,10 @@ public class LightifyClient {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean setDevicePowerState(LightifyDevice device, boolean poweredOn) throws Exception {
+	public boolean setDevicePowerState(LibLightifyDevice device, boolean poweredOn) throws Exception {
 
 		// fail if unsupported
-		if (!device.supports(LightifyCapability.POWER)) {
+		if (!device.supports(LibLightifyCapability.POWER)) {
 
 			throw new IllegalArgumentException("Device does not support power states.");
 		}
@@ -271,10 +281,10 @@ public class LightifyClient {
 	 * @param brightness
 	 * @return
 	 */
-	public boolean setDeviceBrightness(LightifyDevice device, int brightness) throws Exception {
+	public boolean setDeviceBrightness(LibLightifyDevice device, int brightness) throws Exception {
 
 		// fail if unsupported
-		if (!device.supports(LightifyCapability.BRIGHTNESS)) {
+		if (!device.supports(LibLightifyCapability.BRIGHTNESS)) {
 
 			throw new IllegalArgumentException("Device does not support brightness levels.");
 		}
@@ -320,10 +330,10 @@ public class LightifyClient {
 	 * @param temp
 	 * @return
 	 */
-	public boolean setDeviceTemperature(LightifyDevice device, int temp) throws Exception {
+	public boolean setDeviceTemperature(LibLightifyDevice device, int temp) throws Exception {
 
 		// fail if unsupported
-		if (!device.supports(LightifyCapability.TEMPERATURE)) {
+		if (!device.supports(LibLightifyCapability.TEMPERATURE)) {
 
 			throw new IllegalArgumentException("Device does not support temperatures.");
 		}
@@ -372,10 +382,10 @@ public class LightifyClient {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean setDeviceColor(LightifyDevice device, int r, int g, int b) throws Exception {
+	public boolean setDeviceColor(LibLightifyDevice device, int r, int g, int b) throws Exception {
 
 		// fail if unsupported
-		if (!device.supports(LightifyCapability.COLOR)) {
+		if (!device.supports(LibLightifyCapability.COLOR)) {
 
 			throw new IllegalArgumentException("Device does not support colors.");
 		}
